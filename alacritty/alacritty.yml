@@ -1,0 +1,83 @@
+# refer to 
+# 1. https://www.youtube.com/watch?v=BLp61-Lq0kQ&ab_channel=JoshMedeski
+# 2. https://github.com/joshmedeski/dotfiles/blob/main/.config/alacritty/alacritty.yml
+live_config_reload: true
+
+env:
+  TERM: xterm-256color
+
+import:
+  # - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+  # - ~/.config/alacritty/nvim_export.yml
+  # - ~/.config/alacritty/solarized_dark.yaml
+  - ~/.config/alacritty/alacritty-theme/themes/afterglow.yaml
+
+font:
+  normal:
+    family: "BlexMono Nerd Font"
+    # family: "JetBrainsMono Nerd Font"
+    style:  Regular
+
+  size: 13.5
+  # Offset is the extra space around each character. `offset.y` can be thought of as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+window:
+  opacity: 1.0
+  padding:
+    x: 5
+    y: 5
+  dynamic_padding: false
+  # decorations: "none"
+
+
+# NOTE: helpful hex codes
+# \x1b = escape (useful for vim-related keybindings)
+# \x02 = control-b (the default tmux prefix)
+# \x16 = control-v (my tmux prefix)
+# \x31-\x39 = number 1-9
+key_bindings:
+  # alacritty itself
+  - { key: 36,      mods: Command, action: ToggleFullscreen }
+  - { key: T,    mods: Command|Shift, action: SpawnNewInstance } # new-instance
+  # tmux keybinds always start with Ctrl, now we can use Command key through hex code (`xxd -ps` to find them)
+  - { key: Key1, mods: Command, chars: "\x16\x31" } # select tmux window 1
+  - { key: Key2, mods: Command, chars: "\x16\x32" } #                ... 2
+  - { key: Key3, mods: Command, chars: "\x16\x33" } #                ... 3
+  - { key: Key4, mods: Command, chars: "\x16\x34" } #                ... 4
+  - { key: Key5, mods: Command, chars: "\x16\x35" } #                ... 5
+  - { key: Key6, mods: Command, chars: "\x16\x36" } #                ... 6
+  - { key: Key7, mods: Command, chars: "\x16\x37" } #                ... 7
+  - { key: Key8, mods: Command, chars: "\x16\x38" } #                ... 8
+  - { key: Key9, mods: Command, chars: "\x16\x39" } #                ... 9
+  - { key: G,    mods: Command, chars: "\x16g" } # open lazygit
+  - { key: F,    mods: Command, chars: "\x16f" } # open lfcd
+  - { key: D,    mods: Command, chars: "\x16d" } # detach
+  - { key: Comma,mods: Command, chars: "\x16," } # rename the current tmux window
+  - { key: Period,    mods: Command, chars: "\x16." } # goto-last-window
+  - { key: W,    mods: Command, chars: "\x16x" } # kill-pane
+  - { key: T,    mods: Command, chars: "\x16c" } # create a new tmux window
+  - { key: T,    mods: Command|Shift, chars: "\x16\x21" } # <C-v>!: break/move the current tmux pane to a new window
+  - { key: L,    mods: Command, chars: "\x16l" } # prev-window
+  - { key: U,    mods: Command, chars: "\x16u" } # next-window
+  - { key: Z,    mods: Command, chars: "\x16z" } # toggle zoom state of the current tmux pane
+  - { key: S,    mods: Command, chars: "\x16s" } # split
+  - { key: S,    mods: Command|Shift, chars: "\x16S" } # split
+  - { key: V,    mods: Command|Shift, action: Paste } # paste
+  # for this to work, you should goto Preferences -> keyboard shortcuts -> App shortcuts -> add Alacritty -> "Hide alacritty" -> bind to another key such as "F12"
+  # refer to https://github.com/alacritty/alacritty/issues/5346#issuecomment-1055983894
+  - { key: H,    mods: Command, chars: "\x1b\x5b\x31\x3b\x35\x44" } # <C-left> bind to left-pane in tmux.conf
+  - { key: N,    mods: Command, chars: "\x1b\x5b\x31\x3b\x35\x42" } # <C-down> bind to down-pane in tmux.conf
+  - { key: E,    mods: Command, chars: "\x1b\x5b\x31\x3b\x35\x41" } # <C-up> bind to up-pane in tmux.conf
+  - { key: I,    mods: Command, chars: "\x1b\x5b\x31\x3b\x35\x43" } # <C-right> bind to right-pane in tmux.conf
+  - { key: H,    mods: Command|Shift, chars: "\x16H" } 
+  - { key: N,    mods: Command|Shift, chars: "\x16N" } 
+  - { key: E,    mods: Command|Shift, chars: "\x16E" } 
+  - { key: I,    mods: Command|Shift, chars: "\x16I" } 
+  - { key: Key6, mods: Control, chars: "\x1e" } # recover the Ctrl-^ for vim: return to the last buffer
+  - { key: I,    mods: Control, chars: "\x1b\x4f\x50" } # Ctrl-I to send <F1>
+  - { key: C,    mods: Command|Shift, chars: "pwd | perl -p -e 's/\\n//g' | clippy set\n" }
+  - { key: Q,    mods: Control|Shift, chars: ":wa | qa\n" }
+  - { key: P,    mods: Command|Shift, chars: "qingdao_lab_2022\n" }
